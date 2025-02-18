@@ -8,3 +8,11 @@ exports.getAllSkus = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.createSku = async (req, res) => {
+  try {
+    Sku.create({ name: req.body.name, price: req.body.price });
+  } catch (error) {
+    res.status(500).json({ error: "Error creating sku" });
+  }
+};
