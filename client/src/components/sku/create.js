@@ -6,6 +6,7 @@ export const CreateSku = () => {
   console.log("creating sku");
   const [name, setName] = useState("");
   const [price, setPrice] = useState(null);
+  const [inventory, setIventory] = useState(0);
   console.log(name);
   return (
     <Container>
@@ -21,7 +22,15 @@ export const CreateSku = () => {
         onChange={(e) => setPrice(e.target.value)}
         type="number"
       />
-      <Button onClick={() => createSku({ name, price })}>Create</Button>
+      <TextField
+        label="Inventory"
+        value={inventory}
+        onChange={(e) => setIventory(e.target.value)}
+        type="number"
+      />
+      <Button onClick={() => createSku({ name, price, amount: inventory })}>
+        Create
+      </Button>
     </Container>
   );
 };

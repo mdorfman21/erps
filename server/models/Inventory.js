@@ -1,32 +1,34 @@
 ("use strict");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Sku extends Model {
+  class Inventory extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      Sku.Inventories = Sku.hasMany(models.Inventory);
+      Inventory.Sku = Inventory.belongsTo(models.Sku, {
+        as: "Skus",
+        foreignKey: "id",
+      });
     }
   }
-  Sku.init(
+  Inventory.init(
     {
-      name: DataTypes.STRING,
-      price: DataTypes.FLOAT,
+      revision: DataTypes.INTEGER,
+      amount: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: "Sku",
+      modelName: "Inventory",
     }
   );
-  Sku.sync({ force: true })
+  Inventory.sync({ force: true })
     .then(() => {
       console.log("yes re-sync done!");
     })
     .catch((e) => console.log("Can't syncronize", e));
 
-  return Sku;
+  return Inventory;
 };
