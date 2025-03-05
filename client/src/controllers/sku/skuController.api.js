@@ -8,3 +8,8 @@ export const createSku = async ({ name, price, amount }) => {
   });
   return response;
 };
+
+export const getAllSkus = async () => {
+  const response = await axios.get("/api/sku");
+  return response;
+};
