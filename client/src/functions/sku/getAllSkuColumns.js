@@ -1,4 +1,7 @@
-export const getAllSkuColumns = () => [
+import React from "react";
+import Button from "@mui/material/Button";
+
+export const getAllSkuColumns = (editOnClick) => [
   {
     field: "id",
     headerName: "ID",
@@ -16,7 +19,26 @@ export const getAllSkuColumns = () => [
   },
   {
     field: "amount",
-    headerName: "Amount",
+    valueGetter: (value, row) => row.Inventories[0].amount,
+    headerName: "Current Inventory",
     width: 150,
+  },
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 150,
+    renderCell: (params) => {
+      console.log(params);
+
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => editOnClick(params.row.id)}
+        >
+          Edit
+        </Button>
+      );
+    },
   },
 ];

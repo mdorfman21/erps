@@ -5,7 +5,15 @@ const { Op } = require("sequelize");
 
 exports.getAllSkus = async (req, res) => {
   try {
-    const skus = await Sku.findAll();
+    const skus = await Sku.findAll({
+      include: {
+        model: Inventory,
+        limit: 1,
+        // need to add order by revision desc
+        order: [["revision", "DESC"]],
+      },
+    });
+    console.log(skus);
     res.json(skus);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });

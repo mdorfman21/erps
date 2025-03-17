@@ -8,10 +8,15 @@ export const SkuModule = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Button path onClick={() => navigate("create")}>
-        Create
+      <Button
+        path
+        variant="contained"
+        color="primary"
+        onClick={() => navigate("create")}
+      >
+        Create SKU
       </Button>
-      <ViewSkus />
+      <ViewSkus navigate={navigate} />
     </>
   );
 };
